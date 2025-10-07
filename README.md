@@ -1,7 +1,7 @@
 # 💻 Exercícios em C — Codeforces, Beecrowd e LeetCode e exercícios AED
 
 Este repositório reúne soluções de exercícios em **linguagem C**, desenvolvidas a partir de plataformas de programação competitiva e prática de algoritmos, como **Codeforces**, **Beecrowd (URI Online Judge)** e **LeetCode**.  
-Foram adicionados também exercícios e códigos de **Ordenação** e **Estruturas**
+Foram adicionados também exercícios e códigos de **Ordenação** e **Estruturas**.
 
 O objetivo é consolidar conhecimentos em lógica de programação, estruturas de dados e análise de complexidade, aplicando-os em problemas reais e variados.
 
