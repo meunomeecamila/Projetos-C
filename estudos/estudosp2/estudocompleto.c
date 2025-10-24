@@ -5,9 +5,9 @@
 // ! Matérias:
 // ? (Códigos de ordenação) 
 /*
-- Selection 
-- Bubble 
-- Insertion 
+- Selection - ok
+- Bubble - ok
+- Insertion - ok
 - Heap
 - Quick 
 - Merge 
@@ -83,6 +83,23 @@ void bubble(int n, int * vetor){
                 swap(vetor,j,j+1);
             }
         }
+    }
+}
+
+void quicksort(int esq, int dir, int * vetor, int n){
+    int i = esq; int j = dir;
+    int pivo = vetor[n/2];
+    while(i<=j){
+        while(vetor[i]<pivo) i++;
+        while(vetor[j]>pivo) j--;
+
+        if(i<=j){
+            swap(vetor,i,j);
+            i++; j--;
+        }
+
+        if (esq < j) quicksort(esq, j, vetor, n);  // Recursão na parte esquerda
+        if (i < dir) quicksort(i, dir, vetor,n);  // Recursão na parte direita
     }
 }
 
