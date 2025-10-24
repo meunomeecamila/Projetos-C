@@ -70,6 +70,22 @@ void insertion(int n, int*vetor){
     }
 }
 
+// ! Bubble sort
+/* Complexidade no melhor caso: n
+   Complexidade no pior caso: n²
+   Utilização: Fácil de implementar e eficiente em casos pequenos
+*/
+
+void bubble(int n, int * vetor){
+    for(int i=0; i<n-1; i++){
+        for(int j=0; j<n-1-i; j++){
+            if(vetor[j] > vetor[j+1]){
+                swap(vetor,j,j+1);
+            }
+        }
+    }
+}
+
 
 
 
