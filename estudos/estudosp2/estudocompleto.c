@@ -5,31 +5,59 @@
 // ! Matérias:
 // ? (Códigos de ordenação) 
 /*
-- Selection - ok
-- Bubble - ok
-- Insertion - ok
-- Heap - ok
-- Quick - ok
-- Merge - ok
-- Shell - ok
-- Counting - ok
+- Selection 
+- Bubble 
+- Insertion 
+- Heap
+- Quick 
+- Merge 
+- Shell 
+- Counting 
 */
 
 // ? (Estruturas de dados flexíveis)
 /*
-- Pilha flex - ok
-- Fila flex - ok
-- lista simples flex - ok
-- Lista dupla flex - ok
-- Matriz flex - ok
-- Árvore - ok
+- Pilha flex 
+- Fila flex 
+- lista simples flex 
+- Lista dupla flex 
+- Matriz flex 
+- Árvore 
 */
 
 // ? (Extras)
 /*
-- Coleta de lixo - ok
-- Ordenações parciais - ok
+- Coleta de lixo 
+- Ordenações parciais 
 */
 
 //* Algoritmos de ordenação ========================
 // ! Selection sort 
+/* Complexidade no melhor caso: n²
+   Complexidade no pior caso: n²
+   Utilização: Bom para achar o menor item ou para ordenação parcial. 
+*/
+
+void selection(int n, int* vetor){
+    for(int i=0; i<n-1; i++){
+        int menor = i;
+        for(int j=i+1; j<n; j++){
+            if(vetor[j] < vetor[menor]){
+                menor = j;
+            }
+        }
+        swap(vetor,menor,i);
+    }
+}
+
+
+
+
+
+//TODO - Funções auxiliares 
+//TODO - SWAP
+void swap(int* vetor, int i, int j){
+    int tmp = vetor[i];
+    vetor[i] = vetor[j];
+    vetor[j] = tmp;
+}
