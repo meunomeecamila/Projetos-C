@@ -50,6 +50,26 @@ void selection(int n, int* vetor){
     }
 }
 
+// ! Insertion sort 
+/* Complexidade no melhor caso: n
+   Complexidade no pior caso: n²
+   Utilização: Bom para inserir elementos em um conjunto já ou parcialmente ordenado
+*/
+
+void insertion(int n, int*vetor){
+    for(int i=1; i<n; i++){
+        int tmp = vetor[i];
+        int j = i-1;
+
+        while(j>=0 && vetor[j] > tmp){
+            vetor[j+1] = vetor[j]; //arredar
+            j--;
+        }
+
+        vetor[j+1] = tmp;
+    }
+}
+
 
 
 
