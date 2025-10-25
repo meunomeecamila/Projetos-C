@@ -314,6 +314,52 @@ void mostrar(PilhaFlex *p){
     printf("\n");
 }
 
+// ! Fila flexível (com nó cabeça)
+//O primeiro a entrar é o primeiro a sair (FIFO)
+
+typedef struct FilaFlex {
+    Celula *primeiro;
+    Celula *ultimo;
+} FilaFlex;
+
+//função que cria a fila vazia
+FilaFlex *start(){
+    FilaFlex *f = (FilaFlex*)malloc(sizeof(FilaFlex));
+    f->primeiro = (Celula*)malloc(sizeof(Celula)); //nó cabeça
+    f->primeiro->prox = NULL;
+    f->ultimo = f->primeiro;
+    return f;
+}
+
+//inserir considerando a existencia de um nó cabeça
+void inserir(FilaFlex *f, int x){
+    f->ultimo->prox = (Celula*)malloc(sizeof(Celula)); //cria a nova celula
+    f->ultimo->prox->elemento = x; //coloca o valor
+    f->ultimo = f->ultimo->prox; //anda com o ponteiro
+    f->ultimo->prox = NULL; //próximo vale null
+}
+
+//remover considerando a existencia de um nó cabeça
+//obs: primeiro numero valido é o primeiro->prox
+int remover(FilaFlex *f){
+    if(f->primeiro != f->ultimo){
+        Celula *i = f->primeiro;
+        int ele = i->prox->elemento;
+        f->primeiro = f->primeiro->prox;
+        i->prox = NULL;
+        free(i);
+        i = NULL;
+        return ele;
+    } else return -1;
+}
+
+void mostrar(FilaFlex *f){
+    for(Celula*i = f->primeiro->prox; i != NULL; i = i->prox){
+        printf("%d",i->elemento);
+    }
+    printf("\n");
+}
+
 
 
 
