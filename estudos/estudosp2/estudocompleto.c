@@ -8,11 +8,11 @@
 - Selection - ok
 - Bubble - ok
 - Insertion - ok
-- Heap
+- Heap - ok
 - Quick - ok
 - Merge - ok
 - Shell - ok
-- Counting 
+- Counting - ok
 */
 
 // ? (Estruturas de dados flexíveis)
@@ -179,6 +179,10 @@ void merge(int * vetor, int esq, int meio, int dir){
     //se sobrou algo, copia o restante
     while(i < n1) vetor[k++] = esquerda[i++];
     while(j < n2) vetor[k++] = direita[j++];
+
+    free(esquerda);
+    free(direita);
+
 }
 
 // ! Heap
@@ -211,6 +215,35 @@ void heapify(int * vetor, int tam, int i){
         swap(vetor, i, maior);
         heapify(vetor, tam, maior);
     }
+}
+
+// ! Counting
+/* Complexidade no melhor caso: (n+k) sendo k o maior num do vetor
+   Complexidade no pior caso: (n+k) sendo k o maior num do vetor
+   Utilização: Rápido para inteiros pequenos
+*/
+
+void counting(int * vetor, int n){
+    int max = vetor[0];
+    for(int i=1; i<n; i++){
+        if(vetor[i] > max) max = vetor[i];
+    }
+
+    int * contagem = (int *)malloc((max+1)*sizeof(int));
+
+    //contar quantas vezes cada um aparece
+    for(int i=0; i<n; i++) contagem[vetor[i]]++;
+
+    //reconstrução
+    int index = 0;
+    for(int i=0; i<=max; i++){
+        while(contagem[i]>0){
+            vetor[index++] = i;
+            contagem[i]--;
+        }
+    }
+
+    free(contagem);
 }
 
 
