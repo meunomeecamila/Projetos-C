@@ -414,6 +414,36 @@ void inserir_meio(ListaFlex *l, int x, int pos){
     }
 }
 
+int remover_inicio(ListaFlex *l){
+    //considerando o nó cabeça, remover o nó e fazer o primeiro->prox ser o nó
+    if(l->primeiro != l->ultimo){
+        int ele = l->primeiro->prox->elemento; //guardar o valor
+        Celula *j = l->primeiro; //ponteiro auxiliar
+        l->primeiro = l->primeiro->prox; //andar com o primeiro
+
+        //liberar o antigo nó cabeça
+        j->prox = NULL;
+        free(j);
+        j = NULL;
+        return ele;
+    }
+}
+
+int remover_fim(ListaFlex *l){
+    if(l->primeiro != l->ultimo){
+        Celula *i; //ponteiro auxiliar
+        for(i = l->primeiro; i->prox != l->ultimo; i=i->prox); //anda até antes do ultimo
+        int ele = i->prox->elemento; //pega o elemento
+
+        free(i->prox);
+        i->prox = null;
+        l->ultimo = i;
+        i = NULL;
+
+        return ele;
+    }
+}
+
 
 
 
