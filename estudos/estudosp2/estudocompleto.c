@@ -17,8 +17,8 @@
 
 // ? (Estruturas de dados flexíveis)
 /*
-- Pilha flex 
-- Fila flex 
+- Pilha flex - ok
+- Fila flex - ok
 - lista simples flex 
 - Lista dupla flex 
 - Matriz flex 
@@ -429,6 +429,7 @@ void swap(int* vetor, int i, int j){
     vetor[j] = tmp;
 }
 
+//TODO - Pegar o tamanho de alguma coisa flexivel
 int getTam(ListaFlex *l) {
     int tam = 0;
     // começa no primeiro elemento real (depois do nó cabeça)
