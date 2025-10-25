@@ -9,9 +9,9 @@
 - Bubble - ok
 - Insertion - ok
 - Heap
-- Quick 
-- Merge 
-- Shell 
+- Quick - ok
+- Merge - ok
+- Shell - ok
 - Counting 
 */
 
@@ -179,6 +179,38 @@ void merge(int * vetor, int esq, int meio, int dir){
     //se sobrou algo, copia o restante
     while(i < n1) vetor[k++] = esquerda[i++];
     while(j < n2) vetor[k++] = direita[j++];
+}
+
+// ! Heap
+/* Complexidade no melhor caso: n x log n
+   Complexidade no pior caso: n x log n
+   Utilização: Sempre a mesma complexidade, precisa de pouca memória 
+*/
+
+void heap(int * vetor, int n){
+    //transformar vetor em um heap
+    for(int i=(n/2 - 1); i>=0; i--) heapify(vetor,n,i);
+
+    //extrair item por item do heap
+    for(int i=n-1; i>0; i--){
+        //funcao de swap
+        swap(vetor, i,0);
+        heapify(vetor,i,0);
+    }
+}
+
+void heapify(int * vetor, int tam, int i){
+    int maior = i;
+    int esquerda = 2*i + 1; //filho 1
+    int direita = 2*i + 2; //filho 2
+
+    if(esquerda < tam && vetor[esquerda] > vetor[maior]) maior = esquerda;
+    if(direita > tam && vetor[direita] > vetor[maior]) maior = direita;
+
+    if(maior != i){
+        swap(vetor, i, maior);
+        heapify(vetor, tam, maior);
+    }
 }
 
 
