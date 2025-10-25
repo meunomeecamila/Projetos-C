@@ -86,7 +86,16 @@ void bubble(int n, int * vetor){
     }
 }
 
-void quicksort(int esq, int dir, int * vetor, int n){
+// ! Quicksort
+/* Complexidade no melhor caso: n x lg n
+   Complexidade no pior caso: n²
+   Utilização: Muito rápido e usa pouca memória
+*/
+void auxiliarQuick(int *vetor){
+    int tam = 10; //exemplo
+    quicksort(0,tam-1, vetor);
+}
+void quicksort(int esq, int dir, int * vetor){
     int i = esq; int j = dir;
     int pivo = vetor[n/2];
     while(i<=j){
@@ -98,8 +107,31 @@ void quicksort(int esq, int dir, int * vetor, int n){
             i++; j--;
         }
 
-        if (esq < j) quicksort(esq, j, vetor, n);  // Recursão na parte esquerda
-        if (i < dir) quicksort(i, dir, vetor,n);  // Recursão na parte direita
+        if (esq < j) quicksort(esq, j, vetor);  // Recursão na parte esquerda
+        if (i < dir) quicksort(i, dir, vetor);  // Recursão na parte direita
+    }
+}
+
+// ! Shellsort 
+/* Complexidade no melhor caso: n x log² n
+   Complexidade no pior caso: n²
+   Utilização: Melhoria do insertion, desloca menos quando está longe
+*/
+
+//obs: funciona como o shellsort mas com o gap
+void shellsort(int *vetor, int n){
+    for(int gap=n/2; gap > 0; gap/=2){
+        for(int i=gap; i<n; i++){
+            int tmp = vetor[i];
+            int j=i;
+
+            while(j>=gap && vetor[j-gap] > tmp){
+                vetor[j] = vetor[j-gap];
+                j-= gap;
+            }
+
+            vetor[j] = tmp;
+        }
     }
 }
 
