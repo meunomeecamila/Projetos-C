@@ -246,6 +246,77 @@ void counting(int * vetor, int n){
     free(contagem);
 }
 
+//* Estruturas de dados flexíveis ========================
+//? Obs: Sem contar com a matriz, as células das estruturas flexíveis seguem o
+//? mesmo modelo, que é: 
+
+//? Podemos considerar com ou sem o nó cabeça, isso deve ser explicito na pergunta 
+//? ou até no comentário do código
+
+//? Em C, usaremos o método START para inicializar nossas estruturas
+
+typedef struct Celula {
+    int elemento; 
+    struct Celula *prox;
+} Celula;
+
+//construtor
+Celula *nova(int x){
+    Celula *c = (Celula*)malloc(sizeof(Celula));
+    c->elemento = x;
+    c->prox = NULL;
+    return c;
+}
+
+// ! Pilha flexível (sem nó cabeça)
+// O primeiro a entrar é o último a sair, são empilhados (LIFO)
+
+typedef struct PilhaFlex{
+    Celula *topo;
+} PilhaFlex; 
+
+//inicializar a pilha
+PilhaFlex *start(){
+    PilhaFlex *p = (PilhaFlex*)malloc(sizeof(PilhaFlex));
+    p->topo = NULL;
+    return p;
+}
+
+void inserir(PilhaFlex *p, int x){
+    Celula *tmp = (Celula*)malloc(sizeof(Celula));
+    tmp->elemento = x;
+
+    tmp->prox = p->topo;
+    p->topo = tmp;
+    tmp = NULL;
+}
+
+int remover(PilhaFlex *p){
+    if(p->topo != NULL){
+        //celula auxiliar
+        Celula *i = p->topo;
+        p->topo = p->topo->prox; //anda com topo
+
+        int ele = i->elemento; //retorna oq removeu
+        i->prox = NULL;
+        free(i); 
+        //obs: por mais que nessa função não demos malloc, demos na hora de inserir
+        i = NULL;
+        return ele;
+    }
+    else return -1;
+}
+
+void mostrar(PilhaFlex *p){
+    for(Celula *i = p->topo; i != NULL; i=i->prox){
+        printf("%d", i->elemento);
+    }
+    printf("\n");
+}
+
+
+
+
 
 
 
