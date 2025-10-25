@@ -19,7 +19,7 @@
 /*
 - Pilha flex - ok
 - Fila flex - ok
-- lista simples flex 
+- lista simples flex - ok
 - Lista dupla flex 
 - Matriz flex 
 - Árvore 
@@ -400,7 +400,7 @@ void inserir_meio(ListaFlex *l, int x, int pos){
     int tam = getTam(l);
     if(pos < 0 || pos > tam+1) printf("Posição inválida\n");
     else if(pos == 0) inserir_inicio(l,x);
-    else if(pos == tam+1) inserir_fim(l,x);
+    else if(pos == tam) inserir_fim(l,x);
     else {
         //andar até onde quer inserir
         Celula *i = l->primeiro; int j;
@@ -440,6 +440,29 @@ int remover_fim(ListaFlex *l){
         l->ultimo = i;
         i = NULL;
 
+        return ele;
+    }
+}
+
+int remover_meio(ListaFlex *l, int pos){
+    //verificações 
+    int tam = getTam(l);
+    if(pos < 0 || pos > tam) printf("Posição inválida\n");
+    else if(pos == 0) return remover_inicio(l);
+    else if(pos == tam-1) return remover_fim(l);
+    else {
+        Celula *i = l->primeiro;
+        int j;
+        for(j=0; j<pos; j++) i = i->prox; //andar
+
+        //chegou antes da posição, remover
+        int ele = i->prox->elemento;
+        
+        Celula *j = i->prox;
+        i->prox = j->prox;
+        j->prox = NULL;
+        free(j);
+        j = NULL;
         return ele;
     }
 }
