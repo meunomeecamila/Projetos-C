@@ -360,6 +360,35 @@ void mostrar(FilaFlex *f){
     printf("\n");
 }
 
+// ! Lista flexivel simples (com nó cabeça)
+//Pode-se inserir e remover de qualquer lugar
+
+typedef struct ListaFlex{
+    Celula *primeiro;
+    Celula *ultimo;
+} ListaFlex;
+
+ListaFlex *start(){
+    ListaFlex *l = (ListaFlex*)malloc(sizeof(ListaFlex));
+    //inicializar a lista com nó cabeça
+    l->primeiro = (Celula*)malloc(sizeof(Celula));
+    l->primeiro->prox = NULL;
+    l->ultimo = l->primeiro;
+    return l;
+}
+
+void inserir_inicio(ListaFlex *l, int x){
+    Celula *tmp = (Celula*)malloc(sizeof(Celula));
+    tmp->elemento = x;
+
+    //considerando a existencia do nó cabeça, inserimos depois dele
+    tmp->prox = l->primeiro->prox;
+    l->primeiro->prox = tmp;
+    tmp = NULL;
+
+    if(l->ultimo == l->primeiro) l->ultimo = l->primeiro->prox;
+}
+
 
 
 
