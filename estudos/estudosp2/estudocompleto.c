@@ -389,6 +389,31 @@ void inserir_inicio(ListaFlex *l, int x){
     if(l->ultimo == l->primeiro) l->ultimo = l->primeiro->prox;
 }
 
+void inserir_fim(ListaFlex *l, int x){
+    l->ultimo->prox = (Celula*)malloc(sizeof(Celula));
+    l->ultimo->prox->elemento = x;
+    l->ultimo = l->ultimo->prox;
+    l->ultimo->prox = NULL;
+}
+
+void inserir_meio(ListaFlex *l, int x, int pos){
+    int tam = getTam(l);
+    if(pos < 0 || pos > tam+1) printf("Posição inválida\n");
+    else if(pos == 0) inserir_inicio(l,x);
+    else if(pos == tam+1) inserir_fim(l,x);
+    else {
+        //andar até onde quer inserir
+        Celula *i = l->primeiro; int j;
+        for(j=0; j<pos; j++) i=i->prox;
+
+        Celula *j = i->prox;
+        i->prox = (Celula*)malloc(sizeof(Celula));
+        i->prox->elemento = x;
+
+        i->prox->prox = j;
+    }
+}
+
 
 
 
@@ -402,4 +427,11 @@ void swap(int* vetor, int i, int j){
     int tmp = vetor[i];
     vetor[i] = vetor[j];
     vetor[j] = tmp;
+}
+
+int getTam(ListaFlex *l) {
+    int tam = 0;
+    // começa no primeiro elemento real (depois do nó cabeça)
+    for (Celula *i = l->primeiro->prox; i != NULL; i = i->prox) tam++;
+    return tam;
 }
