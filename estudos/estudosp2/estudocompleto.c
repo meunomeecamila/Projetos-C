@@ -135,6 +135,52 @@ void shellsort(int *vetor, int n){
     }
 }
 
+// ! Mergesort
+/* Complexidade no melhor caso: n x log n
+   Complexidade no pior caso: n x log n
+   Utilização: Sempre a mesma complexidade, ordenações externas
+*/
+
+void mergeSort(int * vetor, int esq, int dir){
+    if(esq < dir){
+        int meio = (esq+dir)/2;
+
+        //ordenar as duas metades
+        mergeSort(vetor,esq,meio); //metade 1
+        mergeSort(vetor,meio+1,dir); //metade 2
+
+        //intercalar
+        merge(vetor, esq, meio, dir);
+    }
+}
+
+//função de intercalar
+void merge(int * vetor, int esq, int meio, int dir){
+    //obs: em caso de vetor de tamanho impar, esq fica com 1 a mais
+    int n1 = meio-esq+1; //tamanho do primeiro vetor
+    int n2 = dir-meio; //tamanho do segundo vetor
+
+    int * esquerda = (int *)malloc(n1 * sizeof(int)); //criou o primeiro vetor
+    int * direita = (int *)malloc(n2 * sizeof(int)); //criou o segundo vetor
+
+    for(int i=0; i<n1; i++) esquerda[i] = vetor[esq+i]; //colocou os valores da esq
+    for(int i=0; i<n2; i++) direita[i] = vetor[meio+1+i]; //colocou os valores da dir
+
+    int i=0; //incrementador (cursor) da esquerda
+    int j=0; //incrementador (cursor) da direita
+    int k = esq; //incrementador (cursor) do vetor original
+
+    while(i<n1 && j<n2){
+        //intercalar propriamente dito
+        if(esquerda[i] <= direita[j]) vetor[k++] = esquerda[i++];
+        else vetor[k++] = direita[j++];
+    }
+
+    //se sobrou algo, copia o restante
+    while(i < n1) vetor[k++] = esquerda[i++];
+    while(j < n2) vetor[k++] = direita[j++];
+}
+
 
 
 
