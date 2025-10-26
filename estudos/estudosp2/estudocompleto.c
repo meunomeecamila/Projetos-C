@@ -467,6 +467,36 @@ int remover_meio(ListaFlex *l, int pos){
     }
 }
 
+// ! Lista flexivel dupla (com nó cabeça)
+//Pode-se inserir e remover de qualquer lugar
+//obs: a parte boa da lista dupla é que podemos andar pros dois lados
+
+//para isso, teríamos que usar a celula dupla
+typedef struct CelulaDupla {
+    int elemento;
+    struct CelulaDupla *ant;
+    struct CelulaDupla *prox;
+} CelulaDupla;
+
+typedef struct ListaFlexDupla {
+    CelulaDupla *primeiro;
+    CelulaDupla *ultimo;
+}
+
+//função para inicializar com o nó cabeça
+ListaFlexDupla *start(){
+    //criar uma lista
+    ListaFlexDupla *ld = (ListaFlexDupla*)malloc(sizeof(ListaFlexDupla));
+
+    //criar o nó cabeça
+    ld->primeiro = (CelulaDupla*)malloc(sizeof(CelulaDupla));
+    ld->primeiro->prox = NULL;
+    ld->primeiro->ant = NULL;
+    ld->ultimo = ld->primeiro;
+
+    return ld;
+}
+
 
 
 
