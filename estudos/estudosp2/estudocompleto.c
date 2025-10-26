@@ -524,6 +524,32 @@ void inserir_fim(ListaFlexDupla *ld, int x){
     ld->ultimo = ld->ultimo->prox;
 }
 
+void inserir_meio(ListaFlexDupla *ld, int x, int pos){
+    int tam = getTam(ld);
+
+    //verificações
+    if(pos < 0 || pos > tam) printf("Posição inválida\n");
+    else if(pos == 0) inserir_inicio(ld, x);
+    else if(pos == tam) inserir_fim(ld,x);
+
+    else {
+        //criar a célula
+        CelulaDupla *tmp = (CelulaDupla*)malloc(sizeof(CelulaDupla));
+        tmp->elemento = x;
+        tmp->prox = NULL;
+
+        //anda até antes de inserir
+        CelulaDupla *i = ld->primeiro; int j; 
+        for(j=0; j<pos; j++) i = i->prox;
+
+        tmp->prox = i->prox;
+        tmp->ant = i;
+
+        i->prox = tmp;
+        tmp->prox->ant = tmp;
+    }
+}
+
 
 
 
