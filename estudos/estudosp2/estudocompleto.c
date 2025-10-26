@@ -515,6 +515,15 @@ void inserir_inicio(ListaFlexDupla *ld, int x){
     }
 }
 
+void inserir_fim(ListaFlexDupla *ld, int x){
+    ld->ultimo->prox = (CelulaDupla*)malloc(sizeof(CelulaDupla));
+    ld->ultimo->prox->elemento = x;
+    ld->ultimo->prox->prox = NULL;
+
+    ld->ultimo->prox->ant = ld->ultimo;
+    ld->ultimo = ld->ultimo->prox;
+}
+
 
 
 
