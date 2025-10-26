@@ -20,7 +20,7 @@
 - Pilha flex - ok
 - Fila flex - ok
 - lista simples flex - ok
-- Lista dupla flex 
+- Lista dupla flex - ok
 - Matriz flex 
 - Árvore 
 */
@@ -614,6 +614,12 @@ int remover_meio(ListaFlexDupla *ld, int pos){
     }
 }
 
+void mostrar(ListaFlexDupla *ld){
+    for(CelulaDupla *i = ld->primeiro; i != NULL; i = i->prox){
+        printf("%d", i->elemento);
+    }
+    printf("\n");
+}
 
 
 
