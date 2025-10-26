@@ -497,6 +497,24 @@ ListaFlexDupla *start(){
     return ld;
 }
 
+//funções normais
+void inserir_inicio(ListaFlexDupla *ld, int x){
+    CelulaDupla *tmp = (CelulaDupla*)malloc(sizeof(CelulaDupla));
+    tmp->elemento = x;
+
+    tmp->prox = ld->primeiro->prox;
+    tmp->ant = ld->primeiro;
+    ld->primeiro->prox = tmp;
+
+    if(tmp->prox != NULL){ //ja existia alguem depois do no cabeca
+        tmp->prox->ant = tmp;
+    }
+
+    else { //existia apenas o no cabeca 
+        ld->ultimo = ld->ultimo->prox;
+    }
+}
+
 
 
 
