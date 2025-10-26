@@ -621,6 +621,25 @@ void mostrar(ListaFlexDupla *ld){
     printf("\n");
 }
 
+// ! Matriz flexível
+//Conta com um ponteiro de início que aponta para a célula (0,0)
+//tem ant, prox, sub e inf
+
+//* Coleta de lixo ========================
+/* A coleta de lixo é um método que facilita a vida de quem mexe com Java. 
+Itens que perdem a referência, ou seja, não tem nenhum ponteiro apontado para eles, 
+são coletados pelo Garbage Collector quando é necessária a utilização de espaço. 
+Porém, em C, não temos essa coleta. E por isso é tão importante darmos os free 
+quando damos malloc, calloc, etc; 
+*/
+
+//* Ordenações parciais ========================
+/*As ordenações parciais são formas de implementar algoritmos de ordenação para que eles
+só ordenem k elementos, ao invés de n elementos, sendo k um número de escolha, muitas
+vezes do usuário. O algoritmo que eu acho mais fácil de implementar a busca parcial
+é o Seleção, no qual mudamos apenas o FOR, como no exemplo a seguir
+*/
+
 
 
 
