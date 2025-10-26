@@ -550,6 +550,70 @@ void inserir_meio(ListaFlexDupla *ld, int x, int pos){
     }
 }
 
+//métodos de remover
+//obs: como fizemos malloc nos de inserir, fazemos free nos de remover
+
+int remover_inicio(ListaFlexDupla *ld){
+    if(ld->primeiro != ld->ultimo){
+        //remover o nó cabeça e fazer o próximo ser o nó cabeça
+        int ele = ld->primeiro->prox->elemento;
+        CelulaDupla *tmp = ld->primeiro; //apontar pro primeiro
+        ld->primeiro = ld->primeiro->prox; //andar com o primeiro
+
+        //desconectar
+        tmp->prox = NULL;
+        ld->primeiro->ant = NULL;
+
+        free(tmp);
+        tmp = NULL;
+
+        return ele;
+    }
+    else return -1;
+}
+
+int remover_fim(ListaFlexDupla *ld){
+    if(ld->primeiro != ld->ultimo){
+        CelulaDupla *i = ld->ultimo;
+        int ele = i->elemento;
+        ld->ultimo = ld->ultimo->ant; //andei com o ultimo
+
+        ld->ultimo->prox = NULL;
+        i->ant = NULL;
+
+        free(i);
+        i = NULL;
+
+        return ele;
+    }
+    else return -1;
+}
+
+int remover_meio(ListaFlexDupla *ld, int pos){
+    int tam = getTam(ld);
+    if(pos < 0 || pos > tam-1) {printf("Posição inválida"); return -1; }
+    else if(pos == 0) return remover_inicio(ld);
+    else if(pos == tam-1) return remover_fim(ld);
+    else {
+        //andar até antes da remoção
+        int j; CelulaDupla *i = ld->primeiro;
+        for(j=0; j<pos; j++) i=i->prox;
+
+        CelulaDupla *k = i->prox;
+        int ele = k->elemento;
+
+        i->prox = k->prox;
+        k->prox->ant = i;
+
+        k->ant = NULL;
+        k->prox = NULL;
+        free(k);
+        k = NULL;
+
+        return ele;
+    }
+}
+
 
 
 
