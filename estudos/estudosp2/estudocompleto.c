@@ -781,6 +781,27 @@ void fazerBuraco(MatrizFlex *m, int l, int c){
 
 }
 
+void destruirMatriz(MatrizFlex *m){
+    if(m == NULL || m->inicio == NULL) return; 
+
+    CelulaMatriz *linha = m->inicio;
+    while(linha != NULL){
+        CelulaMatriz *coluna = linha;
+        CelulaMatriz *proximaLinha = linha->inf; // guarda antes de liberar a linha atual
+
+        while(coluna != NULL){
+            CelulaMatriz *tmp = coluna; 
+            coluna = coluna->prox; //anda antes de desconectar
+            free(tmp);
+        }
+
+        linha = proximaLinha;
+    }
+
+    m->inicio = NULL;
+    m = NULL;
+}
+
 
 
 //* Coleta de lixo ========================
