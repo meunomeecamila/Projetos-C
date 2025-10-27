@@ -485,7 +485,7 @@ typedef struct CelulaDupla {
 typedef struct ListaFlexDupla {
     CelulaDupla *primeiro;
     CelulaDupla *ultimo;
-}
+} ListaFlexDupla;
 
 //função para inicializar com o nó cabeça
 ListaFlexDupla* start(){
@@ -625,9 +625,95 @@ void mostrar(ListaFlexDupla *ld){
     printf("\n");
 }
 
-// ! Matriz flexível
+// ! Matriz flexível ========================
 //Conta com um ponteiro de início que aponta para a célula (0,0)
 //tem ant, prox, sub e inf
+
+typedef struct CelulaMatriz {
+    int elemento;
+    struct CelulaMatriz *sub; //ponteiro de cima
+    struct CelulaMatriz *inf; //ponteiro de baixo
+    struct CelulaMatriz *prox; //ponteiro da direita
+    struct CelulaMatriz *ant; //ponteiro da esquerda
+
+} CelulaMatriz;
+
+typedef struct MatrizFlex {
+    CelulaMatriz *inicio;
+} MatrizFlex;
+
+MatrizFlex *start(int l, int c){
+    //alocar a estrutura principal da matriz
+    MatrizFlex *m = (MatrizFlex*)malloc(sizeof(MatrizFlex));
+
+    //criar o nó cabeça no inicio
+    m->inicio = (CelulaMatriz*)malloc(sizeof(CelulaMatriz));
+    m->inicio->elemento = 0;
+    m->inicio->sub = NULL;
+    m->inicio->inf = NULL;
+    m->inicio->prox = NULL;
+    m->inicio->ant = NULL;
+
+    //criar a primeira linha
+    CelulaMatriz *i = m->inicio; //i é a linha atual
+    for(int var=1; var<c; var++){
+        CelulaMatriz *nova = (CelulaMatriz*)malloc(sizeof(CelulaMatriz));
+        nova->prox = NULL;
+        nova->sub = NULL;
+        nova->inf = NULL;
+
+        nova->ant = i; //conecta com a última
+        i->prox = nova;
+
+        //incrementa o i
+        i = i->prox;
+    }
+
+    //cria as demais linhas
+    CelulaMatriz *linhaAcima = m->inicio; //a linha de cima começa em inicio
+    for(int var=1; var<l; var++){
+        //cria o primeiro elemento da nova linha (1,0)
+        CelulaMatriz *nova = (CelulaMatriz*)malloc(sizeof(CelulaMatriz));
+        nova->ant = NULL;
+        nova->prox = NULL;
+        nova->inf = NULL;
+
+        nova->sub = linhaAcima; //conecta com a linha de cima
+        linhaAcima->inf = nova;
+
+        //ponteiros pra percorrer a coluna da próxima linha nova
+        //cel acima começa um elemento para a direita porque o inicio ja foi criado
+        CelulaMatriz *celAcima = linhaAcima->prox;
+        CelulaMatriz *celAtual = linhaAcima;
+
+        //percorrer as colunas
+        for(int var=1; var<c; var++){
+            //cria mais uma célula
+            CelulaMatriz *nova = (CelulaMatriz*)malloc(sizeof(CelulaMatriz));
+            nova->inf = NULL;
+            nova->prox = NULL;
+
+            //fazer as conexões
+            nova->sub = celAcima;
+            nova->ant = celAtual;
+
+            celAcima->inf = nova;
+            celAtual->prox = nova;
+
+            //mover os ponteiros
+            celAcima = celAcima->prox;
+            celAtual = celAtual->prox;
+        }
+
+        //desce pra próxima linha
+        linhaAcima = linhaAcima->inf;
+    }
+
+    //no final, retorna
+    return m;
+}
+
+
 
 //* Coleta de lixo ========================
 /* A coleta de lixo é um método que facilita a vida de quem mexe com Java. 
