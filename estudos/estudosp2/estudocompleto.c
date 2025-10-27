@@ -729,6 +729,21 @@ void imprimir_main_diag(MatrizFlex *m, int l, int c){
     else printf("Matriz inválida \n");
 }
 
+bool acharNUM(MatrizFlex *m, int l, int c, int num){
+    CelulaMatriz *linha = m->inicio;
+
+    for(int i=0; i<l; i++){
+        CelulaMatriz *coluna = linha;
+        for(int j=0; j<c; j++){
+            if(coluna->elemento == num) return true;
+            else coluna = coluna->prox;
+        }
+        linha = linha->inf;
+    }
+
+    return false;
+}
+
 
 
 //* Coleta de lixo ========================
