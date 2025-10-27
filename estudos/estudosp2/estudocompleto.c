@@ -24,13 +24,13 @@
 - Fila flex - ok
 - lista simples flex - ok
 - Lista dupla flex - ok
-- Matriz flex 
+- Matriz flex - ok
 - Árvore 
 */
 
 // ? (Extras)
 /*
-- Coleta de lixo 
+- Coleta de lixo - ok
 - Ordenações parciais 
 */
 
@@ -800,6 +800,55 @@ void destruirMatriz(MatrizFlex *m){
 
     m->inicio = NULL;
     m = NULL;
+}
+
+// ! Observação
+/* É muito possível que nas provas os professores peçam para que implementemos algoritmos
+de ordenação em estruturas flexíveis. Para isso, desenvolvemos duas funções que agem como
+vetores para facilitar a utilização e modularizar os códigos
+O código do algoritmo de ordenação continuará bem parecido, só chamará os seguintes métodos
+*/
+
+// ? Método de procura
+//esse método retorna o elemento da posição que o algoritmo procura. 
+//vou usar aqui como exemplo uma listaFlex, mas funciona para todos
+int procurar(ListaFlex *l, int pos){
+    int j; Celula *i = l->primeiro; //variaveis auxiliares
+
+    //parar na posição
+    for(j=0; j<pos; j++) i=i->prox;
+
+    int valor = i->elemento;
+    return valor;
+}
+
+// ? Método de substituição 
+//esse método não retorna nada, mas substitui o valor do elemento na posição desejada
+//funciona como um swap
+void replace(ListaFlex *l, int x, int pos){
+    int j; Celula *i = l->primeiro;
+
+    for(j=0; j<pos; j++) i = i->prox;
+    i->elemento = x;
+}
+
+// ? Exemplo
+//Vamos usar de exemplo o método de Seleção 
+void selecao(ListaFlex *l, int n){
+    for(int i=0; i<n-1; i++){
+        int menor = i;
+        for(int j=i+1; j<n; j++){
+            if(procurar(l,j) < procurar(l,menor)) menor = j;
+        }
+        
+        //fazer a troca dos valores
+        int v1 = procurar(l, menor);
+        int v2 = procurar(l, i);
+
+        //função propriamente dita
+        replace(l, v1, i);
+        replace(l, v2, menor);
+    }
 }
 
 
