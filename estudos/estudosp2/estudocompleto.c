@@ -713,6 +713,22 @@ MatrizFlex *start(int l, int c){
     return m;
 }
 
+void imprimir_main_diag(MatrizFlex *m, int l, int c){
+    if(l == c){
+        CelulaMatriz *i = m->inicio;
+        while(i != NULL){
+            printf("%d", i->elemento);
+
+            if((i->prox != NULL && i->prox->inf != NULL))
+            i = i->prox->inf;
+
+            else break;
+        }
+        printf("\n");
+    }
+    else printf("Matriz inválida \n");
+}
+
 
 
 //* Coleta de lixo ========================
