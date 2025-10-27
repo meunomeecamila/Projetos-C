@@ -744,6 +744,43 @@ bool acharNUM(MatrizFlex *m, int l, int c, int num){
     return false;
 }
 
+void fazerBuraco(MatrizFlex *m, int l, int c){
+    //nesse caso, dão o elemento da l linha e c coluna 
+    //esse é o elemento que temos que "remover"
+
+    CelulaMatriz *aux = m->inicio;
+    for(int i=0; i<l; i++) aux = aux->inf; //linhas
+    for(int j=0; j<c; j++) aux = aux->prox; //colunas
+
+    //agora, estamos no lugar que queremos remover
+
+    //direita (ant)
+    if(aux->ant != NULL) {
+        aux->ant->prox = NULL;
+    }
+
+    //esquerda (prox)
+    if(aux->prox != NULL){
+        aux->prox->ant = NULL;
+    }
+
+    //parte superior
+    if(aux->sub != NULL){
+        aux->sub->inf = NULL;
+    }
+
+    //parte inferior
+    if(aux->inf != NULL){
+        aux->inf->sub = NULL;
+    }
+
+    aux->inf = aux->sub = aux->prox = aux->ant = NULL;
+
+    free(aux);
+    aux = NULL;
+
+}
+
 
 
 //* Coleta de lixo ========================
