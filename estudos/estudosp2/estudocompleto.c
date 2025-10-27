@@ -1,3 +1,6 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 // * Esse documento conterá as matérias para a prova 2 de AED. 
 
 // TODO - Caso deseje utilizar algum dos códigos, execute na main
@@ -97,6 +100,7 @@ void auxiliarQuick(int *vetor){
 }
 void quicksort(int esq, int dir, int * vetor){
     int i = esq; int j = dir;
+    int n = getTam(vetor);
     int pivo = vetor[n/2];
     while(i<=j){
         while(vetor[i]<pivo) i++;
@@ -436,7 +440,7 @@ int remover_fim(ListaFlex *l){
         int ele = i->prox->elemento; //pega o elemento
 
         free(i->prox);
-        i->prox = null;
+        i->prox = NULL;
         l->ultimo = i;
         i = NULL;
 
@@ -452,8 +456,8 @@ int remover_meio(ListaFlex *l, int pos){
     else if(pos == tam-1) return remover_fim(l);
     else {
         Celula *i = l->primeiro;
-        int j;
-        for(j=0; j<pos; j++) i = i->prox; //andar
+        int k;
+        for(k=0; k<pos-1; k++) i = i->prox; //andar
 
         //chegou antes da posição, remover
         int ele = i->prox->elemento;
@@ -484,7 +488,7 @@ typedef struct ListaFlexDupla {
 }
 
 //função para inicializar com o nó cabeça
-ListaFlexDupla *start(){
+ListaFlexDupla* start(){
     //criar uma lista
     ListaFlexDupla *ld = (ListaFlexDupla*)malloc(sizeof(ListaFlexDupla));
 
@@ -540,7 +544,7 @@ void inserir_meio(ListaFlexDupla *ld, int x, int pos){
 
         //anda até antes de inserir
         CelulaDupla *i = ld->primeiro; int j; 
-        for(j=0; j<pos; j++) i = i->prox;
+        for(j=0; j<pos-1; j++) i = i->prox;
 
         tmp->prox = i->prox;
         tmp->ant = i;
